@@ -166,8 +166,6 @@ func (s *Services) PurolatorShipment(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(err)
 	}
 
-	//log.Println(string(b))
-
 	w.Header().Add("Content-Type", "application/json")
 	fmt.Fprintf(w, string(b))
 
