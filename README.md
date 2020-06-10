@@ -48,6 +48,16 @@ POST
   :9000/track/ups/<Tracking Number>
 ```
 
+### Docker
+
+```
+// Build
+docker build -t go-track .
+// Run
+docker run -d -p 9000:9000 go-track
+
+```
+
 ## Built With
 
 * [GO](https://golang.org/) - Programming language
