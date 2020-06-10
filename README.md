@@ -34,9 +34,19 @@ Start API server on port 9000
 ./go-track
 ```
 
+### End points
 
+```
+GET
+  :9000/track/canadapost/<Tracking Number>
+  :9000/track/dhl/<Tracking Number>
 
-
+POST
+  :9000/track/fedex/<Tracking Number>
+  :9000/track/purolator/shipment/<Tracking Number>
+  :9000/track/purolator/tracking/<Tracking Number>
+  :9000/track/ups/<Tracking Number>
+```
 
 ## Built With
 
