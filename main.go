@@ -22,10 +22,13 @@ func main() {
 	sm := mux.NewRouter()
 
 	getR := sm.Methods(http.MethodGet).Subrouter()
-	getR.HandleFunc("/canadapost/{track}", sh.CanadaPost)
+	getR.HandleFunc("/track/canadapost/{track}", sh.CanadaPost)
 
 	getP := sm.Methods(http.MethodGet).Subrouter()
-	getP.HandleFunc("/fedex/{track}", sh.FedEx)
+	getP.HandleFunc("/track/fedex/{track}", sh.FedEx)
+	getP.HandleFunc("/track/purolator/shipment/{track}", sh.PurolatorShipment)
+	getP.HandleFunc("/track/purolator/tracking/{track}", sh.PurolatorTracking)
+	getP.HandleFunc("/track/ups/{track}", sh.UPS)
 
 	// CORS
 	ch := gohandlers.CORS(gohandlers.AllowedOrigins([]string{"*"}))

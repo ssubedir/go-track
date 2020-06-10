@@ -4,14 +4,14 @@ API wrapper for package tracking services.
 
 ### Supported Services
 Currently supported services
-| Service|  Support | 
+|Service|Support| 
 |---|---|
-| Canada Post|✔|
-| FedEx| ✔|
-|Purolator|✗|
-| United Parcel Service| ✗ |
+|Canada Post|✔|
+|FedEx|✔|
+|Purolator|✔|
+|United Parcel Service|✔|
 |United States Postal Service|✗|
-|DHL Express| ✗|
+|DHL Express|✗|
 
 ### Download
 
