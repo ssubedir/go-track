@@ -40,7 +40,6 @@ func (s *Services) CanadaPost(w http.ResponseWriter, r *http.Request) {
 	then := now.AddDate(0, -2, 0)
 	fmt.Println("then:", then.Format("2006/01/02"))
 	url := "https://www.canadapost.ca/trackweb/rs/track/json/package?refNbrs=" + id + "&mailedFromDate=" + then.Format("2006/01/02") + "&mailedToDate=" + now.Format("2006/01/02")
-	fmt.Println(url)
 	// Setup
 	body := strings.NewReader("")
 	req, err := http.NewRequest("GET", url, body)
@@ -267,4 +266,50 @@ func (s *Services) UPS(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
 	fmt.Fprintf(w, string(b))
 
+}
+
+func (s *Services) DHL(w http.ResponseWriter, r *http.Request) {
+
+	id := mux.Vars(r)["track"]
+	url := "https://www.dhl.com/shipmentTracking?AWB=" + strings.ToUpper(id) + "&countryCode=g0&languageCode=en"
+
+	// Setup
+	body := strings.NewReader("")
+	req, err := http.NewRequest("GET", url, body)
+
+	if err != nil {
+		log.Println(" Error creating http request to dhl, make sure request data is valid")
+		return
+	}
+
+	//headers
+	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0")
+	req.Header.Set("Accept", "application/json, text/javascript, */*; q=0.01")
+	req.Header.Set("Accept-Language", "en-CA,en-US;q=0.7,en;q=0.3")
+	req.Header.Set("Connection", "keep-alive")
+
+	// Send Request
+	response, err := netClient.Do(req)
+	if err != nil {
+
+		if strings.Contains(err.Error(), "no such host") {
+			log.Println(" - No Such host, Check Connection / DNS")
+		} else if strings.Contains(err.Error(), "timeout") {
+			log.Println(" - Http timed out")
+		} else {
+			log.Println(" - Error Sending http request")
+		}
+		return
+	}
+
+	// close body
+	defer response.Body.Close()
+
+	b, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	w.Header().Add("Content-Type", "application/json")
+	fmt.Fprintf(w, string(b))
 }

@@ -10,8 +10,7 @@ Currently supported services
 |FedEx|✔|
 |Purolator|✔|
 |United Parcel Service|✔|
-|United States Postal Service|✗|
-|DHL Express|✗|
+|DHL Express|✔|
 
 ### Download
 

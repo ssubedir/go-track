@@ -23,6 +23,7 @@ func main() {
 
 	getR := sm.Methods(http.MethodGet).Subrouter()
 	getR.HandleFunc("/track/canadapost/{track}", sh.CanadaPost)
+	getR.HandleFunc("/track/dhl/{track}", sh.DHL)
 
 	getP := sm.Methods(http.MethodGet).Subrouter()
 	getP.HandleFunc("/track/fedex/{track}", sh.FedEx)
