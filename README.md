@@ -3,7 +3,6 @@
 API wrapper for package tracking services. 
 
 ### Supported Services
-Supported services
 |Service|Support| 
 |---|---|
 |Canada Post|✔|
